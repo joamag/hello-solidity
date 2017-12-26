@@ -5,7 +5,8 @@ interface tokenRecipient {
 }
 
 contract TokenERC20 {
-    // the public variables of the token
+    // the public variables of the token, includes things like
+    // name symbol and number of decimal places
     string public name;
     string public symbol;
     uint8 public decimals = 18;
