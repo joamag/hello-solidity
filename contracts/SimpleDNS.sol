@@ -14,8 +14,8 @@ contract SimpleDNS {
 
     function addDomain(string _domain, string _ipaddr) public {
         require(records[_domain].owner == address(0x0)
-        || records[_domain].owner == msg.sender);
-        if(records[_domain].owner == address(0x0)) {
+          || records[_domain].owner == msg.sender);
+        if (records[_domain].owner == address(0x0)) {
             size += 1;
         }
         records[_domain] = Record(msg.sender, _ipaddr);
