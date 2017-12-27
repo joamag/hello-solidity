@@ -35,7 +35,7 @@ contract TokenHEL20 {
         string tokenName,
         string tokenSymbol
     ) public {
-        totalSupply = initialSupply * 10 ** uint256(decimals); 
+        totalSupply = initialSupply * 10 ** uint256(decimals);
         balanceOf[msg.sender] = totalSupply;
         name = tokenName;
         symbol = tokenSymbol;
@@ -94,7 +94,7 @@ contract TokenHEL20 {
      */
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         // checks for proper allowance and if there's enought
-        // proceeds with the transfer operation 
+        // proceeds with the transfer operation
         require(_value <= allowance[_from][msg.sender]);
         allowance[_from][msg.sender] -= _value;
         _transfer(_from, _to, _value);
