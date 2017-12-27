@@ -1,5 +1,7 @@
 pragma solidity ^0.4.16;
 
+import "../lib/Utils.sol";
+
 contract SimpleDNS {
     struct Record {
         address owner;
@@ -8,6 +10,11 @@ contract SimpleDNS {
 
     mapping (string => Record) private records;
     uint32 private size = 0;
+    bytes32 public name;
+
+    function SimpleDNS(bytes32 systemName) public {
+        name = systemName;
+    }
 
     function addDomain(string _domain, string _ipaddr) public {
         require(records[_domain].owner == address(0x0)
@@ -18,8 +25,8 @@ contract SimpleDNS {
         records[_domain] = Record(msg.sender, _ipaddr);
     }
 
-    function getDomain(string _domain) public constant returns(string) {
-        return records[_domain].ipaddr;
+    function getDomain(string _domain) public constant returns(bytes32) {
+        return Utils.stringToBytes32(records[_domain].ipaddr);
     }
 
     function getSize() public constant returns(uint32) {
