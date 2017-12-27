@@ -25,11 +25,12 @@ contract TokenHEL20 {
     event Burn(address indexed from, uint256 value);
 
     /**
-     * Constrctor function
+     * Constructor function
      *
      * Initializes contract with initial supply tokens to the creator of the contract.
+     * The token should be compatible with ERC20 https://github.com/ethereum/EIPs/issues/20.
      */
-    function TokenERC20(
+    function TokenHEL20(
         uint256 initialSupply,
         string tokenName,
         string tokenSymbol
@@ -73,10 +74,10 @@ contract TokenHEL20 {
     /**
      * Transfer tokens
      *
-     * Send `_value` tokens to `_to` from your account
+     * Send `_value` tokens to `_to` from your account.
      *
-     * @param _to The address of the recipient
-     * @param _value the amount to send
+     * @param _to The address of the recipient.
+     * @param _value The amount to send.
      */
     function transfer(address _to, uint256 _value) public {
         _transfer(msg.sender, _to, _value);
@@ -85,11 +86,11 @@ contract TokenHEL20 {
     /**
      * Transfer tokens from other address
      *
-     * Send `_value` tokens to `_to` in behalf of `_from`
+     * Send `_value` tokens to `_to` in behalf of `_from`.
      *
-     * @param _from The address of the sender
-     * @param _to The address of the recipient
-     * @param _value the amount to send
+     * @param _from The address of the sender.
+     * @param _to The address of the recipient.
+     * @param _value The amount to send.
      */
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         // checks for proper allowance and if there's enought
@@ -101,12 +102,12 @@ contract TokenHEL20 {
     }
 
     /**
-     * Set allowance for other address
+     * Set allowance for other address.
      *
-     * Allows `_spender` to spend no more than `_value` tokens in your behalf
+     * Allows `_spender` to spend no more than `_value` tokens in your behalf.
      *
-     * @param _spender The address authorized to spend
-     * @param _value the max amount they can spend
+     * @param _spender The address authorized to spend.
+     * @param _value the max amount they can spend.
      */
     function approve(address _spender, uint256 _value) public
         returns (bool success) {
@@ -115,13 +116,14 @@ contract TokenHEL20 {
     }
 
     /**
-     * Set allowance for other address and notify
+     * Set allowance for other address and notify.
      *
-     * Allows `_spender` to spend no more than `_value` tokens in your behalf, and then ping the contract about it
+     * Allows `_spender` to spend no more than `_value` tokens in your behalf,
+     * and then ping the contract about it.
      *
-     * @param _spender The address authorized to spend
-     * @param _value the max amount they can spend
-     * @param _extraData some extra information to send to the approved contract
+     * @param _spender The address authorized to spend.
+     * @param _value The max amount they can spend.
+     * @param _extraData Some extra information to send to the approved contract.
      */
     function approveAndCall(address _spender, uint256 _value, bytes _extraData)
         public
@@ -136,9 +138,9 @@ contract TokenHEL20 {
     /**
      * Destroy tokens
      *
-     * Remove `_value` tokens from the system irreversibly
+     * Remove `_value` tokens from the system irreversibly.
      *
-     * @param _value the amount of money to burn
+     * @param _value The amount of money to burn.
      */
     function burn(uint256 _value) public returns (bool success) {
         require(balanceOf[msg.sender] >= _value);
@@ -149,12 +151,12 @@ contract TokenHEL20 {
     }
 
     /**
-     * Destroy tokens from other account
+     * Destroy tokens from other account.
      *
      * Remove `_value` tokens from the system irreversibly on behalf of `_from`.
      *
-     * @param _from the address of the sender
-     * @param _value the amount of money to burn
+     * @param _from The address of the sender.
+     * @param _value The amount of money to burn.
      */
     function burnFrom(address _from, uint256 _value) public returns (bool success) {
         require(balanceOf[_from] >= _value);
