@@ -1,7 +1,5 @@
 pragma solidity ^0.4.16;
 
-import "../lib/Utils.sol";
-
 contract SimpleDNS {
     struct Record {
         address owner;
@@ -10,10 +8,8 @@ contract SimpleDNS {
 
     mapping (string => Record) private records;
     uint32 private size = 0;
-    bytes32 public name;
 
-    function SimpleDNS(bytes32 systemName) public {
-        name = systemName;
+    function SimpleDNS() public {
     }
 
     function addDomain(string _domain, string _ipaddr) public {
@@ -26,7 +22,11 @@ contract SimpleDNS {
     }
 
     function getDomain(string _domain) public constant returns(bytes32) {
-        return Utils.stringToBytes32(records[_domain].ipaddr);
+        return stringToBytes32(records[_domain].ipaddr);
+    }
+
+    function getDomainString(string _domain) public constant returns(string) {
+        return records[_domain].ipaddr;
     }
 
     function getSize() public constant returns(uint32) {
@@ -39,5 +39,15 @@ contract SimpleDNS {
         // ownership of the domain to the to address
         require(records[_domain].owner == msg.sender);
         records[_domain].owner = _to;
+    }
+
+    function stringToBytes32(string memory source) public pure returns (bytes32 result) {
+        bytes memory tempEmptyStringTest = bytes(source);
+        if (tempEmptyStringTest.length == 0) {
+            return 0x0;
+        }
+        assembly {
+            result := mload(add(source, 32))
+        }
     }
 }
