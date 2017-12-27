@@ -7,7 +7,7 @@ contract SimpleDNS {
     }
 
     mapping (string => Record) private records;
-    uint32 public size = 0;
+    uint32 private size = 0;
 
     function addDomain(string _domain, string _ipaddr) public {
         require(records[_domain].owner == address(0x0)
