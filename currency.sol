@@ -4,7 +4,7 @@ interface tokenRecipient {
     function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) public;
 }
 
-contract TokenERC20 {
+contract TokenHEL20 {
     // the public variables of the token, includes things like
     // name symbol and number of decimal places
     string public name;
