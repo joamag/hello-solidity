@@ -4,6 +4,10 @@ interface tokenRecipient {
     function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) public;
 }
 
+/**
+ * Simple ERC20 compatible contract that allows basic operations
+ * on a currency like token.
+ */
 contract TokenHEL20 {
     // the public variables of the token, includes things like
     // name symbol and number of decimal places
